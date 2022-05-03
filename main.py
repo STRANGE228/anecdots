@@ -1,4 +1,5 @@
 import datetime
+import os
 import http.client
 import smtplib
 from email.mime.text import MIMEText
@@ -31,7 +32,8 @@ emails = dict()
 
 def main():
     db_session.global_init("db/main_base.db")
-    app.run(host='localhost', port=4040, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='localhost', port=port, debug=True)
 
 
 @app.before_request
