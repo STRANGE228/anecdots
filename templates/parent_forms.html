@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>{{ title }}</title>
+
+    <div class="navbar bg-dark">
+        <div class="navbar-brand"><h1>Анекдоты ыхвыфвыхзахпахпвхпхва</h1></div>
+        <ul class="nav">
+            <il class="a_link1 nav-item "><a class="a_link1 nav-link active" href="/index/0">Главная</a></il>
+            {% if current_user.is_authenticated %}
+            {% if current_user.banned == False %}
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/add_anecdote">Добавить анекдот</a>
+            </il>
+            {% endif %}
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/users">Пользователи</a></il>
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/user/{{ current_user.id }}">Мои
+                анекдоты</a></il>
+            {% if current_user.role == 'moder' or current_user.role == 'admin' %}
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/moder_bid">На рассмотрении</a></il>
+            {% endif %}
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <a class="a_link1 nav-item text-warning" style="margin-right: 30px; font-size:20px" href="/logout">[ {{
+                current_user.nickname }} ]</a>
+            {% else %}
+            <div>
+                <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+                <a class="btn btn-success" style="margin-right: 40px;" href="/login">Войти</a>
+            </div>
+            {% endif %}
+        </ul>
+    </div>
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 main-block">{% block content %} {% endblock %}</div>
+    </div>
+</div>
+
+</body>
+</html>
